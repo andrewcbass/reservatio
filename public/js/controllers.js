@@ -70,8 +70,10 @@ app.controller("homeCtrl", function($scope, $state, ReservationService) {
 
   $scope.showOrEdit = true;
   $scope.editReservation = function(reso) {
+    console.log(("reso:", reso));
 
     $scope.showOrEdit = !$scope.showOrEdit;
+    reso.time = new Date(reso.time);
     $scope.editReso = reso;
   }
 
