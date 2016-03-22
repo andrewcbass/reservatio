@@ -31,7 +31,7 @@
     <tbody ng-hide="tdyOrAll">
       <tr ng-repeat="reso in reservations | orderBy: 'time' | filter: searchText">
         <td>{{reso.patron}}</td>
-        <td>{{reso.time | date : "EEE MMM d, h:mm" : "PT"}}</td>
+        <td>{{reso.time | date : "EEE MMM d, h:mm a" : "PT"}}</td>
         <td>{{reso.partySize}}</td>
         <td>{{reso.phone}}</td>
         <td>{{reso.checkedIn}}</td>
