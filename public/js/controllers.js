@@ -47,7 +47,7 @@ app.controller("homeCtrl", function($scope, $state, ReservationService) {
 
   $scope.showOrEdit = true;
   $scope.editReservation = function(reso) {
-    console.log('RESO', reso);
+    
     $scope.showOrEdit = !$scope.showOrEdit;
     $scope.editReso = reso;
   }
@@ -82,16 +82,11 @@ app.controller("homeCtrl", function($scope, $state, ReservationService) {
   }
 });
 
-app.controller("editCtrl", function($scope, $state, ReservationService, reso) {
-  console.log(reso);
-});
-
 app.controller("addCtrl", function($scope, $state, ReservationService) {
 
   $scope.dateToday = new Date();
 
   $scope.saveNewReso = function(valid) {
-    console.log('VALID', valid);
     if(!valid) return;
 
     $scope.newReso.checkedIn = false;

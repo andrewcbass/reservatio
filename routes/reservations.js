@@ -24,7 +24,6 @@ router.get("/today", function(req, res) {
 
   Reservation.find( { "time": { $gt: oneHourAgo}, "time": { $lt: threeHours } },
     function(err, reservations) {
-      console.log("made it here");
       if(err) {
         return res.status(400).send(err);
       }
@@ -56,7 +55,7 @@ router.put("/:id", function(req, res) {
   });
 });
 
-
+//delete reservation
 router.delete("/:id", function(req, res) {
   Reservation.findByIdAndRemove(req.params.id, function(err) {
     if(err) {
@@ -65,12 +64,5 @@ router.delete("/:id", function(req, res) {
     res.send("Reservation updated!");
   });
 });
-
-
-
-
-
-
-
 
 module.exports = router;

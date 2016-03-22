@@ -7,11 +7,13 @@ var bodyParser = require('body-parser');
 
 var mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/reservationsdb",function(err) {
+const mongoUrl = process.env.MONGOLAB_URI || "mongodb://localhost/reservationsdb"
+
+mongoose.connect(mongoUrl,function(err) {
   if(err) {
     console.log('ERR', err);
   } else {
-    console.log("Connected MongoDB! Boring statement.");
+    console.log(`Connected MongoDB! ${mongoUrl}`);
   }
 });
 
