@@ -18,7 +18,7 @@
     <tbody ng-show="tdyOrAll">
       <tr ng-repeat="today in currentRes | orderBy: 'time' | filter: searchText">
         <td>{{today.patron}}</td>
-        <td>{{today.time | date : "EEE MMM d, h:mm" : "PT"}}</td>
+        <td>{{today.time | date : "EEE MMM d, h:mm a" : "PT"}}</td>
         <td>{{today.partySize}}</td>
         <td>{{today.phone}}</td>
         <td>{{today.checkedIn}}</td>
