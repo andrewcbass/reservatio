@@ -1,0 +1,41 @@
+<div class="container">
+  <button class="btn" ng-click="toggleTdyOrAll()">Change View</button>
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Time</th>
+        <th>People</th>
+        <th>Phone</th>
+        <th>Checked In</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <!--  ****************** FOR TODAY **********************-->
+    <tbody ng-show="tdyOrAll">
+      <tr ng-repeat="today in currentRes | orderBy: 'time'">
+        <td>{{today.patron}}</td>
+        <td>{{today.time | date : "EEE MMM d, h:mm" : "PT"}}</td>
+        <td>{{today.partySize}}</td>
+        <td>{{today.phone}}</td>
+        <td>{{today.checkedIn}}</td>
+        <td><i ng-click='editReservation(today)' class="icon-td fa fa-pencil-square"></i></td>
+        <td><i ng-click='deleteReservation(today)' class="icon-td close fa fa-times-circle"></i></td>
+      </tr>
+    </tbody>
+
+    <!--  ****************** ALL Reservations**********************-->
+    <tbody ng-hide="tdyOrAll">
+      <tr ng-repeat="reso in reservations | orderBy: 'time'">
+        <td>{{reso.patron}}</td>
+        <td>{{reso.time | date : "EEE MMM d, h:mm" : "PT"}}</td>
+        <td>{{reso.partySize}}</td>
+        <td>{{reso.phone}}</td>
+        <td>{{reso.checkedIn}}</td>
+        <td><i ng-click='editReservation(reso)' class="icon-td fa fa-pencil-square"></i></td>
+        <td><i ng-click='deleteReservation(reso)' class="icon-td close fa fa-times-circle"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

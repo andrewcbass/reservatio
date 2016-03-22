@@ -19,11 +19,22 @@ router.get("/", function(req, res, next) {
 
 //get today's reservations
 router.get("/today", function(req, res) {
-  Reservation.find({})
-})
+  var oneHourAgo = (Date.now() - 3600000);
+  var threeHours = (Date.now() + 10800000);
+
+  Reservation.find( { "time": { $gt: oneHourAgo}, "time": { $lt: threeHours } },
+    function(err, reservations) {
+      console.log("made it here");
+      if(err) {
+        return res.status(400).send(err);
+      }
+       res.send(reservations);
+    });
+  });
 
 //create reservation
 router.post("/", function(req, res) {
+  req.body.date = moment(req.body.time).unix();
   var newReservation = Reservation(req.body);
 
   newReservation.save(function(err) {

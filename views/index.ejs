@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reservations</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
@@ -18,15 +19,16 @@
 
 <body ng-app="reservationApp">
 </body>
+<div class="container">
+  <a ui-sref="home">Home</a>
+  <a ui-sref="edit">Edit</a>
+  <a ui-sref="add">Add</a>
+  <br>
+  <br>
   <h1>Steak and Fries - Reservations</h1>
-  <p>Current reservations for Steak and Fries</p>
+    <p>Current reservations for Steak and Fries</p>
+</div>
 
-  <div class="container">
-    <a ui-sref="home">Home</a>
-    <a ui-sref="allRes">All</a>
-    <a ui-sref="edit">Edit</a>
-    <a ui-sref="add">Add</a>
-  </div>
 
   <div ng-controller="mainCtrl">
     <ui-view></ui-view>

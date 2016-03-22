@@ -11,7 +11,7 @@ mongoose.connect("mongodb://localhost/reservationsdb",function(err) {
   if(err) {
     console.log('ERR', err);
   } else {
-    console.log("Connected MongoDB! Get that mother-fuckin' data");
+    console.log("Connected MongoDB! Boring statement.");
   }
 });
 
