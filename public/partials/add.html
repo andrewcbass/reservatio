@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Add a new Reservation</h1>
+  <form name="resoForm" class="col s12" ng-submit="saveNewReso(resoForm.$valid)">
+    <div class="row">
+      <div class="input-field col s12">
+        <input ng-model='newReso.patron' type="text" class="validate" name="patron" required>
+        <label>Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <label class="active">Date and Time</label>
+        <input type="datetime-local" class="validate" ng-model="newReso.time" name="time"
+        min="{{dateToday | date:'yyyy-MM-dd'}}" required>
+      </div>
+      <div class="input-field col s6">
+        <input ng-model='newReso.partySize' type="number" class="validate" name="partySize" min="1" max="8" required>
+        <label>Party Size</label>
+      </div>
+      <div class="input-field col s4">
+        <input ng-model='newReso.phone' type="text" class="validate" name="phone" min-length="7" maxlength="14" required>
+        <label>Phone</label>
+      </div>
+    </div>
+    <button class='btn'>Save</button>
+    <button type="button" ui-sref="home" class='btn'>Cancel</button>
+  </form>
+</div>

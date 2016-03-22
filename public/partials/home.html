@@ -1,5 +1,7 @@
-<div class="container">
-  <button class="btn" ng-click="toggleTdyOrAll()">Change View</button>
+<div class="container" ng-show="showOrEdit">
+  <button class="btn" ng-click="toggleTdyOrAll()">All or Today</button>
+  <button class="btn" ui-sref="add">Add Reservation</button>
+  <input ng-model="searchText" placeholder="Search Reservations">
   <table class="striped">
     <thead>
       <tr>
@@ -14,7 +16,7 @@
     </thead>
     <!--  ****************** FOR TODAY **********************-->
     <tbody ng-show="tdyOrAll">
-      <tr ng-repeat="today in currentRes | orderBy: 'time'">
+      <tr ng-repeat="today in currentRes | orderBy: 'time' | filter: searchText">
         <td>{{today.patron}}</td>
         <td>{{today.time | date : "EEE MMM d, h:mm" : "PT"}}</td>
         <td>{{today.partySize}}</td>
@@ -27,7 +29,7 @@
 
     <!--  ****************** ALL Reservations**********************-->
     <tbody ng-hide="tdyOrAll">
-      <tr ng-repeat="reso in reservations | orderBy: 'time'">
+      <tr ng-repeat="reso in reservations | orderBy: 'time' | filter: searchText">
         <td>{{reso.patron}}</td>
         <td>{{reso.time | date : "EEE MMM d, h:mm" : "PT"}}</td>
         <td>{{reso.partySize}}</td>
@@ -38,4 +40,34 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- ************* Edit 'pop up' ********************* -->
+<div class="container" ng-hide="showOrEdit">
+  <h1>Edit Reservation</h1>
+  <form name="resoEditForm" class="col s12" ng-submit="saveResoEdit(resoEditForm.$valid)">
+    <div class="row">
+      <div class="input-field col s12">
+        <input ng-model='editReso.patron' type="text" class="validate" name="patron" required>
+        <label class="active">Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <label class="active">Date and Time</label>
+        <input type="datetime-local" class="validate" ng-model="editReso.time" name="time"
+        min="{{dateToday | date:'yyyy-MM-dd'}}" required>
+      </div>
+      <div class="input-field col s6">
+        <input ng-model='editReso.partySize' type="number" class="validate" name="partySize" min="1" max="8" required>
+        <label class="active">Party Size</label>
+      </div>
+      <div class="input-field col s4">
+        <input ng-model='editReso.phone' type="text" class="validate" name="phone" min-length="7" maxlength="14" required>
+        <label class="active">Phone</label>
+      </div>
+    </div>
+    <button class='btn'>Save</button>
+    <button type="button" ng-click="editReservation(editReso)" class='btn'>Cancel</button>
+  </form>
 </div>

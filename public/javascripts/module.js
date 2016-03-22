@@ -11,11 +11,6 @@ angular.module("reservationApp", ["ui.router"])
       templateUrl: "partials/home.html",
       controller: "homeCtrl"
     })
-    .state("edit", {
-      url: "/",
-      templateUrl: "partials/edit.html",
-      controller: "editCtrl"
-    })
     .state("add", {
       url: "/",
       templateUrl: "partials/add.html",
