@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+  position: relative;
+  transform: scale(2);
+  -webkit-transform: scale(2);
+  left: 50px;
+  visibility: visible;
+}

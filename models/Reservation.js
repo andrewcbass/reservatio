@@ -7,7 +7,7 @@ var Reservation = mongoose.model("Reservation", {
   patron: String,
   partySize: Number,
   phone: String,
-  checkedIn: Boolean
+  checkedIn: {type: Boolean, default: false }
 });
 
 module.exports = Reservation;

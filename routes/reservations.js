@@ -1,6 +1,6 @@
 "use strict";
 
-//var mongoose = require("mongoose");
+var mongoose = require("mongoose");
 var express = require("express");
 var router = express.Router();
 var moment = require("moment");
@@ -19,11 +19,13 @@ router.get("/", function(req, res, next) {
 
 //get today's reservations
 router.get("/today", function(req, res) {
-  var oneHourAgo = (Date.now() - 3600000);
-  var threeHours = (Date.now() + 10800000);
+  var oneHourAgo = moment().subtract(1, "hour").toDate();
+  var threeHours = moment().add(3, "hour").toDate();
 
-  Reservation.find( { "time": { $gt: oneHourAgo}, "time": { $lt: threeHours } },
-    function(err, reservations) {
+  Reservation.find({
+      "time": { "$gte": oneHourAgo, "$lte": threeHours },
+      "checkedIn": false
+    }, function(err, reservations) {
       if(err) {
         return res.status(400).send(err);
       }
@@ -41,6 +43,19 @@ router.post("/", function(req, res) {
       return res.status(400).send(err);
     };
     res.send("Reservation made!");
+  });
+});
+
+//update checkin status
+router.put("/:id/checkin", function(req, res) {
+  Reservation.findById(req.params.id, function(err, reservation) {
+    if(err) return res.status(400).send(err);
+    reservation.checkedIn = !reservation.checkedIn;
+    reservation.save(function(err, savedReso) {
+      if(err) return res.status(400).send(err);
+
+      res.send(savedReso);
+    });
   });
 });
 

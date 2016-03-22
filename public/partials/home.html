@@ -21,7 +21,7 @@
         <td>{{today.time | date : "EEE MMM d, h:mm a" : "PT"}}</td>
         <td>{{today.partySize}}</td>
         <td>{{today.phone}}</td>
-        <td>{{today.checkedIn}}</td>
+        <td><input type="checkbox" ng-model="today.checkedIn" ng-click="updateStatus(today)"></td>
         <td><i ng-click='editReservation(today)' class="icon-td fa fa-pencil-square"></i></td>
         <td><i ng-click='deleteReservation(today)' class="icon-td close fa fa-times-circle"></i></td>
       </tr>
@@ -34,7 +34,7 @@
         <td>{{reso.time | date : "EEE MMM d, h:mm a" : "PT"}}</td>
         <td>{{reso.partySize}}</td>
         <td>{{reso.phone}}</td>
-        <td>{{reso.checkedIn}}</td>
+        <td><input type="checkbox" ng-model="reso.checkedIn" ng-click="updateStatus(reso)"></td>
         <td><i ng-click='editReservation(reso)' class="icon-td fa fa-pencil-square"></i></td>
         <td><i ng-click='deleteReservation(reso)' class="icon-td close fa fa-times-circle"></i></td>
       </tr>

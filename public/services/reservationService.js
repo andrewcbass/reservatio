@@ -11,6 +11,10 @@ angular.module("reservationApp")
     return $http.get("/reservations/today")
   };
 
+  function updateCheckIn(reso, id) {
+    return $http.put(`/reservations/${id}/checkin`)
+  }
+
   function addReservation(newRes) {
     return $http.post("/reservations", newRes)
   };
@@ -26,6 +30,7 @@ angular.module("reservationApp")
   return {
     getReservations: getReservations,
     getCurrentReservations: getCurrentReservations,
+    updateCheckIn: updateCheckIn,
     addReservation: addReservation,
     editReservation: editReservation,
     deleteReservation: deleteReservation

@@ -23,10 +23,33 @@ app.controller("homeCtrl", function($scope, $state, ReservationService) {
       console.log('ERR', err);
     });
 
+  $scope.updateStatus = function(resoST) {
+      var id = resoST._id;
+    ReservationService.updateCheckIn(resoST, id)
+      .then(function(res) {
+        $scope.reservations = $scope.reservations.map(function(reso) {
+          if(reso._id === id) {
+            return resoST;
+          } else {
+            return reso;
+          }
+        });
+        if($scope.currentRes.indexOf(reso) !== -1) {
+          $scope.currentRes = $scope.currentRes.map(function(reso) {
+            if(reso._id === id) {
+              return resoST;
+            } else {
+              return reso;
+            }
+        });
+      }
+    }, function(err) {
+      console.log('ERR', err);
+    });
+  }
 
   $scope.tdyOrAll = true;
   $scope.toggleTdyOrAll = function() {
-
     $scope.tdyOrAll = !$scope.tdyOrAll;
   };
 
@@ -47,7 +70,7 @@ app.controller("homeCtrl", function($scope, $state, ReservationService) {
 
   $scope.showOrEdit = true;
   $scope.editReservation = function(reso) {
-    
+
     $scope.showOrEdit = !$scope.showOrEdit;
     $scope.editReso = reso;
   }
@@ -89,7 +112,6 @@ app.controller("addCtrl", function($scope, $state, ReservationService) {
   $scope.saveNewReso = function(valid) {
     if(!valid) return;
 
-    $scope.newReso.checkedIn = false;
     var newReso = $scope.newReso;
 
     ReservationService.addReservation(newReso)
